@@ -49,6 +49,47 @@
         linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     }
 
+    /* Comparison slider styles */
+    .comparison-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .comparison-after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .comparison-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #10b981;
+      cursor: ew-resize;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.9);
+      z-index: 20;
+    }
+    .comparison-handle::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 38px;
+      height: 38px;
+      background: #10b981;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.7);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
     /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
@@ -85,7 +126,8 @@
         </div>
       </div>
 
-      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+      <div class="hidden md:flex items-center space-x-7 text-sm font-medium text-gray-300">
+        <a href="#comparison" class="hover:text-emerald-400 transition-colors">Before & After</a>
         <a href="#showcase" class="hover:text-emerald-400 transition-colors">In-Game Captures</a>
         <a href="#features" class="hover:text-emerald-400 transition-colors">Features</a>
         <a href="#gallery" class="hover:text-emerald-400 transition-colors">Texture Gallery</a>
@@ -97,7 +139,7 @@
         <a href="Terra32.zip" download="Terra32.zip" class="relative group inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 rounded-lg shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02] active:scale-[0.98]">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           <span>Download Zip</span>
-          <span class="hidden sm:inline text-xs text-emerald-200 bg-emerald-700/50 px-1.5 py-0.5 rounded">13.2 MB</span>
+          <span class="hidden sm:inline text-xs text-emerald-200 bg-emerald-700/50 px-1.5 py-0.5 rounded font-mono">13.2 MB</span>
         </a>
       </div>
     </div>
@@ -121,17 +163,28 @@
     </p>
 
     <!-- ACTION BUTTONS -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
       <a href="Terra32.zip" download="Terra32.zip" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all hover:-translate-y-0.5 active:translate-y-0">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         <span>Download Terra32.zip</span>
         <span class="text-xs bg-black/25 px-2 py-0.5 rounded-full font-mono">13.2 MB</span>
       </a>
 
-      <a href="#showcase" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-gray-200 bg-mc-card hover:bg-gray-800 border border-gray-700 rounded-xl transition-all hover:border-emerald-500/50">
-        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        <span>Explore In-Game Captures</span>
+      <a href="#comparison" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-gray-200 bg-mc-card hover:bg-gray-800 border border-gray-700 rounded-xl transition-all hover:border-emerald-500/50">
+        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+        <span>Compare Vanilla vs Terra32</span>
       </a>
+    </div>
+
+    <!-- PUBLISHING PLATFORMS BADGES -->
+    <div class="flex items-center justify-center gap-3 text-xs text-gray-400 mb-14">
+      <span class="text-gray-500 font-medium">Available for:</span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-800/80 border border-gray-700/60 text-gray-300 font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Modrinth Ready
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gray-800/80 border border-gray-700/60 text-gray-300 font-mono">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span> CurseForge Ready
+      </span>
     </div>
 
     <!-- HERO FEATURED SPOTLIGHT -->
@@ -190,7 +243,65 @@
     </div>
   </header>
 
-  <!-- IN-GAME SHOWCASE SECTION -->
+  <!-- INTERACTIVE BEFORE & AFTER COMPARISON SLIDER -->
+  <section id="comparison" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-dark">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Interactive Comparison</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Vanilla vs Terra32 (Modded)</h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-2">
+          Slide the bar left and right to inspect the dramatic transformation from flat vanilla 16x to volumetric 3D POM and Photon Shaders.
+        </p>
+      </div>
+
+      <!-- COMPARISON TAB BUTTONS -->
+      <div class="flex justify-center gap-2 mb-6">
+        <button onclick="switchCompareTab('village')" id="comp-tab-village" class="comp-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-2">
+          <span>🏡</span> <span>Village & Overlays</span>
+        </button>
+        <button onclick="switchCompareTab('taiga')" id="comp-tab-taiga" class="comp-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>🌲</span> <span>Taiga & 3D Foliage</span>
+        </button>
+        <button onclick="switchCompareTab('mesa')" id="comp-tab-mesa" class="comp-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>🏜️</span> <span>Badlands & POM Depth</span>
+        </button>
+      </div>
+
+      <!-- COMPARISON SLIDER CONTAINER -->
+      <div class="relative rounded-2xl overflow-hidden border border-gray-700 bg-mc-card shadow-2xl">
+        <div id="slider-wrapper" class="comparison-container aspect-[16/9] w-full cursor-ew-resize">
+          <!-- BEFORE IMAGE (Vanilla) -->
+          <img id="img-before" src="assets/compare_village_vanilla.jpg" alt="Vanilla 16x" class="w-full h-full object-cover pointer-events-none">
+          <div class="absolute top-4 left-4 z-10 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 uppercase tracking-wider border border-white/10 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+            Vanilla (16x Flat)
+          </div>
+
+          <!-- AFTER IMAGE (Terra32 + Photon) -->
+          <div id="after-container" class="comparison-after" style="width: 50%;">
+            <img id="img-after" src="assets/compare_village_modded.jpg" alt="Terra32 Modded" class="w-full h-full object-cover pointer-events-none">
+            <div class="absolute top-4 right-4 z-10 bg-emerald-600/90 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-bold text-white uppercase tracking-wider border border-emerald-400/30 shadow-lg flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+              Terra32 + Photon (3D POM)
+            </div>
+          </div>
+
+          <!-- SLIDER HANDLE -->
+          <div id="slider-handle" class="comparison-handle" style="left: 50%;"></div>
+        </div>
+
+        <div class="p-4 bg-mc-card border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="slider-caption">Village Homestead: 32x cobblestone with POM depth, blended path overlays, realistic campfire smoke, and Photon lighting.</span>
+          </div>
+          <span class="text-gray-500 font-mono">← Drag slider to compare →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN-GAME SHOWCASE SECTION (11 SCENES) -->
   <section id="showcase" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-darker">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-10">
@@ -203,23 +314,38 @@
 
       <!-- SCENE SELECTOR TABS -->
       <div class="flex flex-wrap justify-center gap-2 mb-8">
-        <button onclick="selectScene(0)" id="scene-tab-0" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-2">
+        <button onclick="selectScene(0)" id="scene-tab-0" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-1.5">
           <span>🌸</span> <span>Cherry Overlook</span>
         </button>
-        <button onclick="selectScene(1)" id="scene-tab-1" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
-          <span>🌿</span> <span>Lush River Canopy</span>
+        <button onclick="selectScene(1)" id="scene-tab-1" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🏡</span> <span>Village House</span>
         </button>
-        <button onclick="selectScene(2)" id="scene-tab-2" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+        <button onclick="selectScene(2)" id="scene-tab-2" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🌲</span> <span>Taiga Forest</span>
+        </button>
+        <button onclick="selectScene(3)" id="scene-tab-3" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🏜️</span> <span>Badlands Mesa</span>
+        </button>
+        <button onclick="selectScene(4)" id="scene-tab-4" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🌌</span> <span>Aurora Night</span>
+        </button>
+        <button onclick="selectScene(5)" id="scene-tab-5" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🌿</span> <span>Lush River</span>
+        </button>
+        <button onclick="selectScene(6)" id="scene-tab-6" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
           <span>💎</span> <span>Amethyst Geode</span>
         </button>
-        <button onclick="selectScene(3)" id="scene-tab-3" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
-          <span>✨</span> <span>Lush Caves & Lake</span>
+        <button onclick="selectScene(7)" id="scene-tab-7" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>✨</span> <span>Lush Caves</span>
         </button>
-        <button onclick="selectScene(4)" id="scene-tab-4" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
-          <span>🌅</span> <span>Oceanic Sunset</span>
+        <button onclick="selectScene(8)" id="scene-tab-8" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🌅</span> <span>Ocean Sunset</span>
         </button>
-        <button onclick="selectScene(5)" id="scene-tab-5" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+        <button onclick="selectScene(9)" id="scene-tab-9" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
           <span>🌾</span> <span>Savanna Highlands</span>
+        </button>
+        <button onclick="selectScene(10)" id="scene-tab-10" class="scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5">
+          <span>🍃</span> <span>Birch Lake</span>
         </button>
       </div>
 
@@ -261,37 +387,14 @@
           <div id="stage-tags" class="flex flex-wrap gap-1.5 shrink-0">
             <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">Distant Horizons LOD</span>
             <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">32x Foliage</span>
-            <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">Iris Shaders</span>
+            <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">Photon Shader</span>
           </div>
         </div>
       </div>
 
-      <!-- THUMBNAIL STRIP -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-        <div onclick="selectScene(0)" id="thumb-0" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-emerald-500 relative aspect-[16/9] transition-all hover:opacity-100 shadow-md">
-          <img src="assets/showcase_cherry_mountains.jpg" alt="Cherry Mountains" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Cherry Overlook</div>
-        </div>
-        <div onclick="selectScene(1)" id="thumb-1" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
-          <img src="assets/showcase_river_foliage.png" alt="River Foliage" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Lush River Canopy</div>
-        </div>
-        <div onclick="selectScene(2)" id="thumb-2" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
-          <img src="assets/showcase_amethyst_geode.jpg" alt="Amethyst Geode" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Amethyst Geode</div>
-        </div>
-        <div onclick="selectScene(3)" id="thumb-3" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
-          <img src="assets/showcase_lush_caves.png" alt="Lush Caves" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Lush Caves</div>
-        </div>
-        <div onclick="selectScene(4)" id="thumb-4" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
-          <img src="assets/showcase_sunset_ocean.jpg" alt="Ocean Sunset" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Oceanic Sunset</div>
-        </div>
-        <div onclick="selectScene(5)" id="thumb-5" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
-          <img src="assets/showcase_savanna_horizons.jpg" alt="Savanna Highlands" class="w-full h-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Savanna Highlands</div>
-        </div>
+      <!-- THUMBNAIL STRIP (11 THUMBNAILS) -->
+      <div id="thumb-container" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2">
+        <!-- Rendered by JS -->
       </div>
     </div>
   </section>
@@ -393,7 +496,7 @@
           </div>
           <h3 class="text-xl font-bold text-white mb-2">32x Animated Fluids</h3>
           <p class="text-gray-400 text-sm leading-relaxed">
-            Fluid textures for lava and water with calibrated frame interpolation and timing metadata. Zero shader conflicts with native UShader lava physics.
+            Fluid textures for lava and water with calibrated frame interpolation and timing metadata. Zero shader conflicts with native Photon lava physics.
           </p>
           <div class="mt-4 flex flex-wrap gap-1.5">
             <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Interpolated Lava</span>
@@ -570,24 +673,97 @@
       <div class="flex items-center space-x-3">
         <img src="assets/pack_icon.png" alt="Terra32" class="w-7 h-7 rounded pixelated">
         <span class="font-bold text-white">Terra32 Resource Pack</span>
-        <span class="text-xs text-gray-500">• Minecraft Java Edition</span>
+        <span class="text-xs text-gray-500">• Created by snake12ep-ship-it</span>
       </div>
 
       <p class="text-xs text-gray-500">
         100% unified 32x textures • labPBR 1.2+ • Built-in Lush Foliage • Distant Horizons Ready
       </p>
 
-      <div>
-        <a href="Terra32.zip" download="Terra32.zip" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 underline">
-          Download v1.0 (.zip)
-        </a>
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="https://github.com/snake12ep-ship-it/terra32" target="_blank" class="text-gray-400 hover:text-white underline">GitHub Repo</a>
+        <a href="Terra32.zip" download="Terra32.zip" class="text-emerald-400 hover:text-emerald-300 underline">Download v1.0 (.zip)</a>
       </div>
     </div>
   </footer>
 
   <!-- SCRIPT LOGIC -->
   <script>
-    // 1. IN-GAME SHOWCASE DATA
+    // ==========================================
+    // 1. BEFORE & AFTER COMPARISON SLIDER LOGIC
+    // ==========================================
+    const sliderWrapper = document.getElementById('slider-wrapper');
+    const afterContainer = document.getElementById('after-container');
+    const sliderHandle = document.getElementById('slider-handle');
+    let isDragging = false;
+
+    function updateSlider(x) {
+      const rect = sliderWrapper.getBoundingClientRect();
+      let pos = (x - rect.left) / rect.width;
+      pos = Math.max(0, Math.min(1, pos));
+      const percentage = pos * 100;
+      afterContainer.style.width = percentage + '%';
+      sliderHandle.style.left = percentage + '%';
+    }
+
+    sliderWrapper.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      updateSlider(e.clientX);
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) updateSlider(e.clientX);
+    });
+
+    sliderWrapper.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      updateSlider(e.touches[0].clientX);
+    });
+    window.addEventListener('touchend', () => { isDragging = false; });
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) updateSlider(e.touches[0].clientX);
+    });
+
+    const compareTabs = {
+      village: {
+        before: 'assets/compare_village_vanilla.jpg',
+        after: 'assets/compare_village_modded.jpg',
+        caption: 'Village Homestead: 32x cobblestone with POM depth, blended path overlays, realistic campfire smoke, and Photon lighting.'
+      },
+      taiga: {
+        before: 'assets/compare_taiga_vanilla.jpg',
+        after: 'assets/compare_taiga_modded.jpg',
+        caption: 'Old Growth Taiga: Volumetric bushy leaves with fluff layers, 3D ferns & grass models, mossy cobblestone POM, and Photon sunbeams.'
+      },
+      mesa: {
+        before: 'assets/compare_mesa_vanilla.jpg',
+        after: 'assets/compare_mesa_modded.jpg',
+        caption: 'Badlands Mesa: Raymarched Parallax Occlusion Mapping on red sand and banded terracotta strata with realistic specular sun glare.'
+      }
+    };
+
+    function switchCompareTab(key) {
+      document.querySelectorAll('.comp-tab').forEach(btn => {
+        btn.classList.remove('bg-emerald-500', 'text-white', 'shadow-md', 'shadow-emerald-500/20');
+        btn.classList.add('bg-mc-card', 'text-gray-400');
+      });
+      const active = document.getElementById('comp-tab-' + key);
+      if (active) {
+        active.classList.remove('bg-mc-card', 'text-gray-400');
+        active.classList.add('bg-emerald-500', 'text-white', 'shadow-md', 'shadow-emerald-500/20');
+      }
+
+      const data = compareTabs[key];
+      if (data) {
+        document.getElementById('img-before').src = data.before;
+        document.getElementById('img-after').src = data.after;
+        document.getElementById('slider-caption').textContent = data.caption;
+      }
+    }
+
+    // ==========================================
+    // 2. IN-GAME SHOWCASE DATA (11 SCENES)
+    // ==========================================
     const scenes = [
       {
         title: 'Cherry Valley & Distant Horizon Mountains',
@@ -595,6 +771,34 @@
         image: 'assets/showcase_cherry_mountains.jpg',
         desc: 'Photographed live in-game: lush cherry blossom canopies, drifting petal particles, and snowcapped mountains rendered with Distant Horizons LODs.',
         tags: ['Distant Horizons LOD', '32x Foliage', 'Photon Shader']
+      },
+      {
+        title: 'Village Homestead & Campfire Glow',
+        badge: 'Plains Village',
+        image: 'assets/showcase_village_modded.jpg',
+        desc: 'Detailed 32x cobblestone walls, dark oak log rings, natural dirt-to-grass CTM overlays, volumetric campfire smoke, and cat in the yard.',
+        tags: ['32x Cobblestone POM', 'Connected Overlays', 'Photon Lighting']
+      },
+      {
+        title: 'Old Growth Taiga & 3D Podzol Forest Floor',
+        badge: 'Taiga Biome',
+        image: 'assets/showcase_taiga_modded.jpg',
+        desc: 'Huge spruce trunks with deep bark textures, volumetric needle leaves, 3D ferns and grass models, and mossy cobblestone ruins.',
+        tags: ['3D Bushy Spruce', 'Volumetric Ferns', 'labPBR Moss']
+      },
+      {
+        title: 'Badlands Mesa Canyons & POM Depth',
+        badge: 'Badlands Biome',
+        image: 'assets/showcase_mesa_modded.jpg',
+        desc: 'Stratified colored terracotta canyon walls and foreground red sand blocks showing true 3D raymarched parallax occlusion displacement.',
+        tags: ['Raymarched POM', '32x Terracotta', 'Atmospheric Sky']
+      },
+      {
+        title: 'Aurora Borealis Over Icy Waters',
+        badge: 'Polar Night',
+        image: 'assets/showcase_aurora_night.png',
+        desc: 'Vibrant green and purple northern lights glowing across the starry night sky with golden horizon twilight reflecting across ocean ripples.',
+        tags: ['Aurora Borealis', 'Photon Night Sky', 'Water Reflections']
       },
       {
         title: 'Lush River Canopy & Water Reflections',
@@ -630,10 +834,35 @@
         image: 'assets/showcase_savanna_horizons.jpg',
         desc: 'Rolling savanna plateaus featuring dense multi-plane grass, smooth block edge blending across rock and dirt, and expansive terrain vistas.',
         tags: ['Continuity CTM Overlays', '8-Plane Dense Grass', '32x Terrain']
+      },
+      {
+        title: 'Birch Forest & Lake Sunlight',
+        badge: 'Birch Forest',
+        image: 'assets/showcase_birch_lake.jpg',
+        desc: 'Soft golden sunlight filtering through hanging birch leaves across calm lake water, highlighting realistic tree canopies and water clarity.',
+        tags: ['Volumetric Sunbeams', 'Leaf Subsurface SSS', 'Clear Water']
       }
     ];
 
     let currentSceneIdx = 0;
+
+    function renderThumbnails() {
+      const container = document.getElementById('thumb-container');
+      container.innerHTML = '';
+      scenes.forEach((s, i) => {
+        const div = document.createElement('div');
+        div.id = 'thumb-' + i;
+        div.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 ' + 
+          (i === currentSceneIdx ? 'border-emerald-500 ring-2 ring-emerald-500/30 opacity-100' : 'border-gray-800 opacity-70 hover:opacity-100') + 
+          ' relative aspect-[16/9] transition-all shadow-md';
+        div.onclick = () => selectScene(i);
+        div.innerHTML = `
+          <img src="${s.image}" alt="${s.badge}" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/85 px-1 py-0.5 text-[9px] font-bold text-center text-white truncate">${s.badge}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
 
     function selectScene(idx) {
       currentSceneIdx = idx;
@@ -662,18 +891,18 @@
       // Update tabs
       document.querySelectorAll('.scene-tab').forEach((tab, i) => {
         if (i === idx) {
-          tab.className = 'scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-2';
+          tab.className = 'scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-1.5';
         } else {
-          tab.className = 'scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2';
+          tab.className = 'scene-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-1.5';
         }
       });
 
       // Update thumbnails
       document.querySelectorAll('.thumb-card').forEach((thumb, i) => {
         if (i === idx) {
-          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-emerald-500 relative aspect-[16/9] transition-all opacity-100 shadow-md ring-2 ring-emerald-500/30';
+          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-emerald-500 ring-2 ring-emerald-500/30 opacity-100 relative aspect-[16/9] transition-all shadow-md';
         } else {
-          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md';
+          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 opacity-70 hover:opacity-100 relative aspect-[16/9] transition-all shadow-md';
         }
       });
     }
@@ -688,7 +917,9 @@
       selectScene(nextIdx);
     }
 
-    // 2. LIGHTBOX MODAL
+    // ==========================================
+    // 3. LIGHTBOX MODAL
+    // ==========================================
     function openLightbox(src, caption) {
       const modal = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
@@ -720,7 +951,9 @@
       if (e.key === 'ArrowRight') nextScene();
     });
 
-    // 3. TEXTURE GALLERY DATA
+    // ==========================================
+    // 4. TEXTURE GALLERY DATA
+    // ==========================================
     const textures = [
       { name: 'Diamond Sword', category: 'item', file: 'assets/diamond_sword.png', desc: '3D Sculpted • Flat Drop' },
       { name: 'Netherite Sword', category: 'item', file: 'assets/netherite_sword.png', desc: 'Metallic f0=255 • 3D Sculpt' },
@@ -778,6 +1011,7 @@
     }
 
     // Initialize
+    renderThumbnails();
     renderGallery();
   </script>
 </body>
