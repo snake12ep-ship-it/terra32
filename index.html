@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terra32 — 32x Faithful Parallax (POM), Lush Foliage & Distant Horizons</title>
+  <link rel="icon" type="image/png" href="assets/pack_icon.png">
+  <meta name="description" content="Terra32 is an ultra-faithful 32x Minecraft resource pack featuring raymarched Parallax Occlusion Mapping (POM), labPBR 1.2+, volumetric Lush Foliage, seamless Block Overlays, and Distant Horizons LOD compatibility.">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            mc: {
+              green: '#22c55e',
+              emerald: '#10b981',
+              cyan: '#06b6d4',
+              dark: '#0b0f19',
+              darker: '#06080e',
+              card: '#111827',
+              border: '#1f2937',
+              gold: '#fbbf24'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    .pixelated {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+
+    .bg-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #06080e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+  </style>
+</head>
+<body class="bg-mc-darker text-gray-100 font-sans antialiased selection:bg-emerald-500 selection:text-white">
+
+  <!-- BACKGROUND DECORATION -->
+  <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-emerald-500/15 via-cyan-500/5 to-transparent blur-3xl pointer-events-none z-0"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="relative z-50 border-b border-gray-800/80 bg-mc-darker/80 backdrop-blur-md sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="assets/pack_icon.png" alt="Terra32 Icon" class="w-9 h-9 rounded-lg pixelated border border-emerald-500/30 shadow-md">
+        <div>
+          <span class="font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
+            TERRA<span class="text-emerald-400">32</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">POM 1.2</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+        <a href="#showcase" class="hover:text-emerald-400 transition-colors">In-Game Captures</a>
+        <a href="#features" class="hover:text-emerald-400 transition-colors">Features</a>
+        <a href="#gallery" class="hover:text-emerald-400 transition-colors">Texture Gallery</a>
+        <a href="#install" class="hover:text-emerald-400 transition-colors">Installation</a>
+        <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <a href="Terra32.zip" download="Terra32.zip" class="relative group inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 rounded-lg shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Download Zip</span>
+          <span class="hidden sm:inline text-xs text-emerald-200 bg-emerald-700/50 px-1.5 py-0.5 rounded">13.2 MB</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="relative z-10 pt-14 pb-20 px-4 sm:px-6 lg:px-8 text-center max-w-6xl mx-auto">
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold mb-6 animate-pulse">
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      <span>Minecraft 1.21.x Ready • Distant Horizons Compatible • Recommended Shader: <strong>Photon</strong></span>
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+      Faithful Minecraft, <br class="hidden sm:block">
+      <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Sculpted in Volumetric 3D.</span>
+    </h1>
+
+    <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+      A handcrafted 32x resource pack engineered for total visual immersion: raymarched Parallax Occlusion Mapping (POM),
+      volumetric bushy foliage, smooth CTM block edge blending, and flawless Distant Horizons infinite vistas.
+    </p>
+
+    <!-- ACTION BUTTONS -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+      <a href="Terra32.zip" download="Terra32.zip" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all hover:-translate-y-0.5 active:translate-y-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Download Terra32.zip</span>
+        <span class="text-xs bg-black/25 px-2 py-0.5 rounded-full font-mono">13.2 MB</span>
+      </a>
+
+      <a href="#showcase" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-gray-200 bg-mc-card hover:bg-gray-800 border border-gray-700 rounded-xl transition-all hover:border-emerald-500/50">
+        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Explore In-Game Captures</span>
+      </a>
+    </div>
+
+    <!-- HERO FEATURED SPOTLIGHT -->
+    <div class="relative rounded-2xl overflow-hidden border border-gray-700/80 bg-mc-card shadow-2xl group max-w-5xl mx-auto mb-12">
+      <div class="relative aspect-[16/9] w-full overflow-hidden">
+        <img src="assets/showcase_cherry_mountains.jpg" alt="Cherry Grove Overlook with Distant Horizons" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-mc-darker/90 via-mc-darker/20 to-transparent"></div>
+        
+        <!-- FLOATING IN-GAME BADGES -->
+        <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+          <span class="bg-black/75 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold text-white uppercase tracking-wider border border-white/10 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            In-Game Capture • Cherry Grove
+          </span>
+          <span class="hidden sm:inline-flex bg-cyan-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-cyan-300 border border-cyan-500/30">
+            Distant Horizons 512+ Chunks
+          </span>
+          <span class="inline-flex bg-purple-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-purple-300 border border-purple-500/30">
+            Recommended: Photon Shader
+          </span>
+        </div>
+
+        <div class="absolute bottom-5 left-5 right-5 text-left flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white drop-shadow-md">Cherry Valley & Distant Horizon Mountains</h2>
+            <p class="text-xs sm:text-sm text-gray-300 drop-shadow max-w-xl mt-1">
+              Photographed directly in-game: lush cherry blossom canopies, drifting petal particles, and snowcapped mountains rendered with Distant Horizons LODs.
+            </p>
+          </div>
+          <button onclick="openLightbox('assets/showcase_cherry_mountains.jpg', 'Cherry Valley & Distant Horizons')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-xs font-semibold text-white transition-all shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            <span>View Fullscreen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE METRICS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto border border-gray-800/80 bg-mc-card/40 backdrop-blur-sm p-4 rounded-2xl">
+      <div class="p-3 text-center">
+        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">1,252</div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">32x Blocks</div>
+      </div>
+      <div class="p-3 text-center border-l border-gray-800">
+        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono">1,300+</div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">labPBR Maps</div>
+      </div>
+      <div class="p-3 text-center border-l border-gray-800">
+        <div class="text-2xl sm:text-3xl font-extrabold text-teal-400 font-mono">824</div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">32x Items</div>
+      </div>
+      <div class="p-3 text-center border-l border-gray-800">
+        <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono">100%</div>
+        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mt-1">Authentic 32x</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- IN-GAME SHOWCASE SECTION -->
+  <section id="showcase" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-darker">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">In-Game Captures</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Captured Live in Minecraft</h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
+          Every screenshot below was captured in real-time with Terra32, <strong class="text-emerald-400">Photon Shader</strong> (Recommended), and Distant Horizons LOD rendering.
+        </p>
+      </div>
+
+      <!-- SCENE SELECTOR TABS -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button onclick="selectScene(0)" id="scene-tab-0" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-2">
+          <span>🌸</span> <span>Cherry Overlook</span>
+        </button>
+        <button onclick="selectScene(1)" id="scene-tab-1" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>🌿</span> <span>Lush River Canopy</span>
+        </button>
+        <button onclick="selectScene(2)" id="scene-tab-2" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>💎</span> <span>Amethyst Geode</span>
+        </button>
+        <button onclick="selectScene(3)" id="scene-tab-3" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>✨</span> <span>Lush Caves & Lake</span>
+        </button>
+        <button onclick="selectScene(4)" id="scene-tab-4" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>🌅</span> <span>Oceanic Sunset</span>
+        </button>
+        <button onclick="selectScene(5)" id="scene-tab-5" class="scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2">
+          <span>🌾</span> <span>Savanna Highlands</span>
+        </button>
+      </div>
+
+      <!-- MAIN STAGE DISPLAY -->
+      <div class="relative rounded-2xl overflow-hidden border border-gray-700 bg-mc-card shadow-2xl mb-6">
+        <div class="relative aspect-[16/9] w-full overflow-hidden bg-black/60">
+          <img id="stage-img" src="assets/showcase_cherry_mountains.jpg" alt="Active Scene" class="w-full h-full object-cover transition-opacity duration-300">
+          
+          <!-- NAVIGATION ARROWS -->
+          <button onclick="prevScene()" aria-label="Previous image" class="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-emerald-600/90 text-white flex items-center justify-center backdrop-blur-md border border-white/10 transition-all hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="nextScene()" aria-label="Next image" class="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-emerald-600/90 text-white flex items-center justify-center backdrop-blur-md border border-white/10 transition-all hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- LIGHTBOX TRIGGER BUTTON -->
+          <button onclick="openCurrentInLightbox()" class="absolute top-4 right-4 bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-lg text-xs font-semibold text-white flex items-center gap-1.5 transition-all">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            <span>Full Resolution</span>
+          </button>
+        </div>
+
+        <!-- DETAILS BAR -->
+        <div class="p-6 bg-mc-card border-t border-gray-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span id="stage-badge" class="px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                Cherry Grove
+              </span>
+              <span class="text-xs text-gray-500 font-mono">1024 × 576 In-Game Render</span>
+            </div>
+            <h3 id="stage-title" class="text-xl font-bold text-white">Cherry Valley & Distant Horizon Mountains</h3>
+            <p id="stage-desc" class="text-sm text-gray-400 mt-1 max-w-3xl leading-relaxed">
+              Expansive mountain ranges rendered with Distant Horizons LODs, fluttering cherry petal particles, and 32x foliage textures.
+            </p>
+          </div>
+
+          <div id="stage-tags" class="flex flex-wrap gap-1.5 shrink-0">
+            <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">Distant Horizons LOD</span>
+            <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">32x Foliage</span>
+            <span class="text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono">Iris Shaders</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- THUMBNAIL STRIP -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+        <div onclick="selectScene(0)" id="thumb-0" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-emerald-500 relative aspect-[16/9] transition-all hover:opacity-100 shadow-md">
+          <img src="assets/showcase_cherry_mountains.jpg" alt="Cherry Mountains" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Cherry Overlook</div>
+        </div>
+        <div onclick="selectScene(1)" id="thumb-1" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
+          <img src="assets/showcase_river_foliage.png" alt="River Foliage" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Lush River Canopy</div>
+        </div>
+        <div onclick="selectScene(2)" id="thumb-2" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
+          <img src="assets/showcase_amethyst_geode.jpg" alt="Amethyst Geode" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Amethyst Geode</div>
+        </div>
+        <div onclick="selectScene(3)" id="thumb-3" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
+          <img src="assets/showcase_lush_caves.png" alt="Lush Caves" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Lush Caves</div>
+        </div>
+        <div onclick="selectScene(4)" id="thumb-4" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
+          <img src="assets/showcase_sunset_ocean.jpg" alt="Ocean Sunset" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Oceanic Sunset</div>
+        </div>
+        <div onclick="selectScene(5)" id="thumb-5" class="thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md">
+          <img src="assets/showcase_savanna_horizons.jpg" alt="Savanna Highlands" class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 bg-black/80 px-2 py-1 text-[10px] font-bold text-center text-white truncate">Savanna Highlands</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <section id="features" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-dark">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Pack Architecture</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Engineered for Perfection</h2>
+        <p class="text-gray-400 text-base mt-2">Every block, item, font glyph, and shader pass has been calibrated to deliver a unified aesthetic without compromises.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-emerald-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
+            🌿
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Lush Foliage Built-In</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            11 species of volumetric bushy leaves with protruding fluff plates, 8-plane dense wild grass, 3D ferns, blooming water lilies, and flowers with ground leaf rosettes.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">11 Leaf Types</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Optimized Culling</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Random Rotations</span>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-cyan-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
+            🏔️
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Seamless Block Overlays</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Eliminates harsh grid seams! Grass edges lap smoothly onto adjacent stone, dirt, diorite, sand, and gravel using Continuity CTM with dynamic biome tint matching.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Continuity CTM</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Grass & Dirt</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Connected Glass</span>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-purple-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition-transform">
+            💎
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">labPBR 1.2+ & POM Depth</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Raymarched Parallax Occlusion Mapping (POM) gives blocks real 3D carved depth. Specular maps control roughness, metalness, and subsurface scattering on foliage.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-semibold">Photon Calibrated</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Zero Cutout Tearing</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Subsurface SSS</span>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-amber-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 mb-5 group-hover:scale-110 transition-transform">
+            ⚔️
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">3D Weapons & Flat Drops</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            38 custom sculpted 3D models for swords, pickaxes, axes, shovels, hoes, and bows. Dropped items lay flat on the ground naturally instead of spinning endlessly!
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Flat Ground Drop</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">All Tool Tiers</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">3D Bow States</span>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-blue-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400 mb-5 group-hover:scale-110 transition-transform">
+            🔤
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">32x High-Definition Font</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Ultra-sharp font sheets upscaled with 16x16 glyph cells, covering ASCII, Latin, Accented, SGA Enchanting, and Illager runes with zero kerning distortion.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">2,531 Glyphs</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">0 Kerning Errors</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">HD Tooltips & Chat</span>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-mc-card/80 border border-gray-800 rounded-2xl p-7 hover:border-red-500/40 transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/25 flex items-center justify-center text-red-400 mb-5 group-hover:scale-110 transition-transform">
+            ⚡
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">32x Animated Fluids</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Fluid textures for lava and water with calibrated frame interpolation and timing metadata. Zero shader conflicts with native UShader lava physics.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Interpolated Lava</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Fluid Waves</span>
+            <span class="text-[11px] bg-gray-800/80 text-gray-300 px-2 py-0.5 rounded">Shader Friendly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXTURE GALLERY SECTION -->
+  <section id="gallery" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-darker">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Pixel Showcase</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Crisp 32x Sprites</h2>
+          <p class="text-gray-400 text-sm mt-1">Hover over any item or block to inspect its labPBR material characteristics.</p>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+          <button onclick="filterGallery('all')" class="gallery-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-white">All Sprites</button>
+          <button onclick="filterGallery('block')" class="gallery-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800">Blocks</button>
+          <button onclick="filterGallery('item')" class="gallery-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800">Items</button>
+          <button onclick="filterGallery('foliage')" class="gallery-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800">Foliage</button>
+        </div>
+      </div>
+
+      <!-- TEXTURE GRID -->
+      <div id="texture-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION GUIDE SECTION -->
+  <section id="install" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-dark">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Setup Guide</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Simple 3-Minute Installation</h2>
+        <p class="text-gray-400 text-base mt-2">Compatible with Fabric, NeoForge, Prism Launcher, Modrinth & Vanilla.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Step 1 -->
+        <div class="bg-mc-card border border-gray-800 rounded-2xl p-6 flex items-start gap-5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-mono font-bold text-lg shrink-0">
+            1
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white mb-1">Download Terra32.zip</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Click the download button to get the pre-built <code class="text-emerald-400 font-mono text-xs bg-gray-800 px-1.5 py-0.5 rounded">Terra32.zip</code> package (13.2 MB).
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-mc-card border border-gray-800 rounded-2xl p-6 flex items-start gap-5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-mono font-bold text-lg shrink-0">
+            2
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white mb-1">Place in Resource Packs Folder</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-2">
+              Place the downloaded file directly into your Minecraft instance's resource pack folder:
+            </p>
+            <div class="bg-mc-darker border border-gray-800 rounded-lg p-3 font-mono text-xs text-gray-300 break-all select-all">
+              %APPDATA%\.minecraft\resourcepacks\Terra32.zip
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Or in Prism Launcher: Right click instance &rarr; Minecraft Folder &rarr; resourcepacks.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-mc-card border border-gray-800 rounded-2xl p-6 flex items-start gap-5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-mono font-bold text-lg shrink-0">
+            3
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white mb-1">Activate In-Game & Enjoy</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Open Minecraft, navigate to <strong>Options &rarr; Resource Packs</strong> and move <strong>Terra32</strong> to the right column. 
+              Click <strong>Done</strong> or hit <kbd class="px-1.5 py-0.5 bg-gray-800 border border-gray-700 rounded text-xs font-mono text-gray-200">F3 + T</kbd> to reload!
+            </p>
+            <div class="mt-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-xs text-emerald-300">
+              💡 <strong>Recommended Setup:</strong> For the ultimate experience as seen in our screenshots, pair Terra32 with <strong class="text-white">Photon Shader</strong> (Recommended), <strong>Distant Horizons</strong>, and <strong>Continuity</strong>!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-800/80 bg-mc-darker">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Questions & Answers</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="bg-mc-card border border-emerald-500/40 rounded-xl p-5 group cursor-pointer transition-colors open:border-emerald-500" open>
+          <summary class="font-bold text-white flex justify-between items-center list-none select-none">
+            <span class="flex items-center gap-2">⭐ Which shader is recommended for Terra32?</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-gray-300 text-sm mt-3 leading-relaxed">
+            The recommended shader is <strong class="text-emerald-400">Photon Shader</strong> by SixthSurge! Terra32’s labPBR 1.2+ specular reflections, subsurface scattering on lush foliage, and raymarched Parallax Occlusion Mapping (POM) depth are specifically tuned and calibrated for Photon. All official in-game captures on this website were photographed using <strong>Photon Shader + Distant Horizons</strong>.
+          </p>
+        </details>
+
+        <details class="bg-mc-card border border-gray-800 rounded-xl p-5 group cursor-pointer transition-colors open:border-emerald-500/40">
+          <summary class="font-bold text-white flex justify-between items-center list-none select-none">
+            <span>Does Terra32 support Distant Horizons?</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            Yes! Terra32 is fully tested and verified with Distant Horizons and Iris Shaders. Distant terrain, mountain ranges, and valleys seamlessly match Terra32's biomes and color palettes with zero chunk borders or color mismatches.
+          </p>
+        </details>
+
+        <details class="bg-mc-card border border-gray-800 rounded-xl p-5 group cursor-pointer transition-colors open:border-emerald-500/40">
+          <summary class="font-bold text-white flex justify-between items-center list-none select-none">
+            <span>Do I need a shader to use Terra32?</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            No! Terra32 looks gorgeous in vanilla Minecraft without shaders. You will enjoy crisp 32x textures, 3D bushy leaves, dense grass, 3D weapons, and flat dropped items. However, to see the raymarched 3D surface depth (POM) and realistic reflections, <strong>Photon Shader</strong> is strongly recommended.
+          </p>
+        </details>
+
+        <details class="bg-mc-card border border-gray-800 rounded-xl p-5 group cursor-pointer transition-colors open:border-emerald-500/40">
+          <summary class="font-bold text-white flex justify-between items-center list-none select-none">
+            <span>How do the smooth Block Overlays work?</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            Terra32 uses the OptiFine / Continuity CTM overlay format. The Continuity mod (Fabric 1.21.x) reads the 17 overlay tiles to automatically blend adjacent blocks, making grass and dirt transition naturally into stone, gravel, and sand.
+          </p>
+        </details>
+
+        <details class="bg-mc-card border border-gray-800 rounded-xl p-5 group cursor-pointer transition-colors open:border-emerald-500/40">
+          <summary class="font-bold text-white flex justify-between items-center list-none select-none">
+            <span>Will the bushy leaves cause lag or FPS drops?</span>
+            <span class="text-emerald-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+            No. The base cube of each leaf block retains vanilla <code class="text-emerald-400 font-mono text-xs">cullface</code> logic. This means all interior leaf faces inside tree canopies are culled by the GPU, keeping triangle counts minimal and frame rates smooth.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex-col items-center justify-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-emerald-400 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="max-w-6xl w-full flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="Fullscreen capture" class="max-h-[80vh] w-auto max-w-full rounded-xl shadow-2xl border border-gray-800 object-contain">
+      <div id="lightbox-caption" class="text-center text-gray-200 mt-4 text-sm font-medium"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-gray-800/80 bg-mc-darker py-12 px-4 sm:px-6 lg:px-8 text-center">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center space-x-3">
+        <img src="assets/pack_icon.png" alt="Terra32" class="w-7 h-7 rounded pixelated">
+        <span class="font-bold text-white">Terra32 Resource Pack</span>
+        <span class="text-xs text-gray-500">• Minecraft Java Edition</span>
+      </div>
+
+      <p class="text-xs text-gray-500">
+        100% unified 32x textures • labPBR 1.2+ • Built-in Lush Foliage • Distant Horizons Ready
+      </p>
+
+      <div>
+        <a href="Terra32.zip" download="Terra32.zip" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 underline">
+          Download v1.0 (.zip)
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // 1. IN-GAME SHOWCASE DATA
+    const scenes = [
+      {
+        title: 'Cherry Valley & Distant Horizon Mountains',
+        badge: 'Cherry Grove Overlook',
+        image: 'assets/showcase_cherry_mountains.jpg',
+        desc: 'Photographed live in-game: lush cherry blossom canopies, drifting petal particles, and snowcapped mountains rendered with Distant Horizons LODs.',
+        tags: ['Distant Horizons LOD', '32x Foliage', 'Photon Shader']
+      },
+      {
+        title: 'Lush River Canopy & Water Reflections',
+        badge: 'River Biome',
+        image: 'assets/showcase_river_foliage.png',
+        desc: 'Protruding volumetric tree foliage, custom 3D red and brown mushroom caps, and smooth real-time water reflections under volumetric cloud shadows.',
+        tags: ['3D Bushy Leaves', 'Custom 3D Mushrooms', 'Water Reflections']
+      },
+      {
+        title: 'Amethyst Geode & labPBR Crystalline Specular',
+        badge: 'Amethyst Geode',
+        image: 'assets/showcase_amethyst_geode.jpg',
+        desc: 'Deep purple crystal facets illuminated in dark geodes. labPBR 1.2+ specular roughness maps create authentic crystalline reflections and light bounces.',
+        tags: ['labPBR 1.2 Specular', 'Crystalline Depth', '32x Amethyst']
+      },
+      {
+        title: 'Subterranean Lush Caves & Emissive Flora',
+        badge: 'Lush Caves',
+        image: 'assets/showcase_lush_caves.png',
+        desc: 'Warm glow berries cascading from the ceiling, reflecting on still underground pool water with natural ambient occlusion.',
+        tags: ['Emissive Flora', 'Screen-Space Reflections', 'Lush Vines']
+      },
+      {
+        title: 'Golden Sunset & Distant Ice Peaks',
+        badge: 'Oceanic Sunset',
+        image: 'assets/showcase_sunset_ocean.jpg',
+        desc: 'Atmospheric sunset glare over rippling ocean water with distant icy mountain spires rendered seamlessly across hundreds of chunks.',
+        tags: ['Fresnel Water Physics', 'Volumetric Sunlight', 'Infinite Horizon']
+      },
+      {
+        title: 'Savanna Highlands & Connected Terrain',
+        badge: 'Savanna Biome',
+        image: 'assets/showcase_savanna_horizons.jpg',
+        desc: 'Rolling savanna plateaus featuring dense multi-plane grass, smooth block edge blending across rock and dirt, and expansive terrain vistas.',
+        tags: ['Continuity CTM Overlays', '8-Plane Dense Grass', '32x Terrain']
+      }
+    ];
+
+    let currentSceneIdx = 0;
+
+    function selectScene(idx) {
+      currentSceneIdx = idx;
+      const s = scenes[idx];
+      
+      const img = document.getElementById('stage-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = s.image;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('stage-title').textContent = s.title;
+      document.getElementById('stage-badge').textContent = s.badge;
+      document.getElementById('stage-desc').textContent = s.desc;
+
+      const tagsContainer = document.getElementById('stage-tags');
+      tagsContainer.innerHTML = '';
+      s.tags.forEach(t => {
+        const span = document.createElement('span');
+        span.className = 'text-xs bg-gray-800/90 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700/60 font-mono';
+        span.textContent = t;
+        tagsContainer.appendChild(span);
+      });
+
+      // Update tabs
+      document.querySelectorAll('.scene-tab').forEach((tab, i) => {
+        if (i === idx) {
+          tab.className = 'scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-white shadow-md shadow-emerald-500/20 flex items-center gap-2';
+        } else {
+          tab.className = 'scene-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-mc-card text-gray-400 hover:text-white border border-gray-800 flex items-center gap-2';
+        }
+      });
+
+      // Update thumbnails
+      document.querySelectorAll('.thumb-card').forEach((thumb, i) => {
+        if (i === idx) {
+          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-emerald-500 relative aspect-[16/9] transition-all opacity-100 shadow-md ring-2 ring-emerald-500/30';
+        } else {
+          thumb.className = 'thumb-card cursor-pointer rounded-xl overflow-hidden border-2 border-gray-800 relative aspect-[16/9] opacity-75 hover:opacity-100 transition-all shadow-md';
+        }
+      });
+    }
+
+    function prevScene() {
+      const nextIdx = (currentSceneIdx - 1 + scenes.length) % scenes.length;
+      selectScene(nextIdx);
+    }
+
+    function nextScene() {
+      const nextIdx = (currentSceneIdx + 1) % scenes.length;
+      selectScene(nextIdx);
+    }
+
+    // 2. LIGHTBOX MODAL
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      img.src = src;
+      cap.textContent = caption;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openCurrentInLightbox() {
+      const s = scenes[currentSceneIdx];
+      openLightbox(s.image, s.title + ' — ' + s.desc);
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevScene();
+      if (e.key === 'ArrowRight') nextScene();
+    });
+
+    // 3. TEXTURE GALLERY DATA
+    const textures = [
+      { name: 'Diamond Sword', category: 'item', file: 'assets/diamond_sword.png', desc: '3D Sculpted • Flat Drop' },
+      { name: 'Netherite Sword', category: 'item', file: 'assets/netherite_sword.png', desc: 'Metallic f0=255 • 3D Sculpt' },
+      { name: 'Diamond Pickaxe', category: 'item', file: 'assets/diamond_pickaxe.png', desc: 'Sculpted Head & Shaft' },
+      { name: 'Golden Apple', category: 'item', file: 'assets/golden_apple.png', desc: 'Specular Gold Sheen' },
+      { name: 'Totem of Undying', category: 'item', file: 'assets/totem_of_undying.png', desc: '32x Crisp Details' },
+      { name: 'Ender Pearl', category: 'item', file: 'assets/ender_pearl.png', desc: 'Smooth Cosmic Core' },
+      { name: 'Bow', category: 'item', file: 'assets/bow.png', desc: '3D Pulling States' },
+      { name: 'Grass Block Top', category: 'block', file: 'assets/grass_block_top.png', desc: 'Continuity Overlay + SSS' },
+      { name: 'Oak Leaves', category: 'foliage', file: 'assets/oak_leaves.png', desc: 'Fluffy Volumetric 3D' },
+      { name: 'Short Grass', category: 'foliage', file: 'assets/short_grass.png', desc: '8-Plane Radial Tufts' },
+      { name: 'Dandelion', category: 'foliage', file: 'assets/dandelion.png', desc: 'Ground Leaf Rosette' },
+      { name: 'Poppy', category: 'foliage', file: 'assets/poppy.png', desc: 'Flared Blooming Petals' },
+      { name: 'Water Lily', category: 'foliage', file: 'assets/white_flower.png', desc: 'Submerged Roots + Blossom' },
+      { name: 'Brown Mushroom', category: 'foliage', file: 'assets/brown_mushroom.png', desc: 'Volumetric 3D Cap' },
+      { name: 'Red Mushroom', category: 'foliage', file: 'assets/red_mushroom.png', desc: 'Volumetric 3D Cap' },
+      { name: 'Diamond Ore', category: 'block', file: 'assets/diamond_ore.png', desc: 'POM Depth + Gem Facets' },
+      { name: 'Stone Bricks', category: 'block', file: 'assets/stone_bricks.png', desc: 'Deep Mortar Grooves' },
+      { name: 'Crying Obsidian', category: 'block', file: 'assets/crying_obsidian.png', desc: 'High Emissive Veins' },
+      { name: 'Amethyst Block', category: 'block', file: 'assets/amethyst_block.png', desc: 'Crystalline Reflections' },
+      { name: 'Glowstone', category: 'block', file: 'assets/glowstone.png', desc: 'Full Emission + POM' },
+      { name: 'Redstone Lamp', category: 'block', file: 'assets/redstone_lamp_on.png', desc: 'Bright Core Emission' },
+      { name: 'Copper Block', category: 'block', file: 'assets/copper_block.png', desc: 'Copper Conductive f0' },
+      { name: 'TNT', category: 'block', file: 'assets/tnt_side.png', desc: 'HD Typography & Fuse' }
+    ];
+
+    function renderGallery(filter = 'all') {
+      const grid = document.getElementById('texture-grid');
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all' ? textures : textures.filter(t => t.category === filter);
+
+      filtered.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'bg-mc-card/90 border border-gray-800 rounded-xl p-3 flex flex-col items-center justify-center text-center hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all hover:scale-105 group cursor-pointer shadow-lg';
+        card.innerHTML = `
+          <div class="w-16 h-16 flex items-center justify-center bg-black/40 rounded-lg p-2 mb-2 group-hover:scale-110 transition-transform">
+            <img src="${t.file}" alt="${t.name}" class="w-12 h-12 pixelated object-contain drop-shadow-md">
+          </div>
+          <div class="text-xs font-bold text-gray-200 group-hover:text-emerald-400 transition-colors truncate w-full">${t.name}</div>
+          <div class="text-[10px] text-gray-500 mt-0.5 truncate w-full">${t.desc}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterGallery(category) {
+      document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-500', 'text-white');
+        btn.classList.add('bg-mc-card', 'text-gray-400');
+      });
+      event.target.classList.remove('bg-mc-card', 'text-gray-400');
+      event.target.classList.add('bg-emerald-500', 'text-white');
+      renderGallery(category);
+    }
+
+    // Initialize
+    renderGallery();
+  </script>
+</body>
+</html>
